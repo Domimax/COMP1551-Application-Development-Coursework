@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AppDevProject
+﻿namespace AppDevProject
 {
     class Answer
     {
+        public Answer(int id, string answerString) {
+            this.Id = id;
+            this.AnswerString = answerString;
+        }
+
+        public string AnswerString { get; set; }
+        public int Id { get; set; }
     }
 }

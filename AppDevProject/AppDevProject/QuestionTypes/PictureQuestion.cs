@@ -13,10 +13,6 @@ namespace AppDevProject.QuestionTypes
         private PictureBox pictureBox2;
         private PictureBox pictureBox3;
         private PictureBox pictureBox4;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
-        private RadioButton radioButton3;
-        private RadioButton radioButton4;
 
         public PictureQuestion()
         {

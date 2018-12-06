@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace AppDevProject.QuestionTypes
@@ -18,6 +16,9 @@ namespace AppDevProject.QuestionTypes
         {
             Window = new Form();
             InitializeComponent();
+
+            Thread thread = new Thread(MusicFunc);
+            thread.Start();
         }
 
         private void InitializeComponent()
@@ -28,6 +29,14 @@ namespace AppDevProject.QuestionTypes
             Window.FormClosed += new System.Windows.Forms.FormClosedEventHandler(Window_FormClosed);
             Window.ResumeLayout(false);
             Window.PerformLayout();
+        }
+
+        void MusicFunc()
+        {
+            WMPLib.WindowsMediaPlayer axMusicPlayer = new WMPLib.WindowsMediaPlayer();
+            axMusicPlayer.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Music\beethoven-symphony9-4-ode-to-joy-piano-solo.mp3");
+            axMusicPlayer.settings.setMode("loop", true);
+            axMusicPlayer.controls.play();
         }
     }
 }

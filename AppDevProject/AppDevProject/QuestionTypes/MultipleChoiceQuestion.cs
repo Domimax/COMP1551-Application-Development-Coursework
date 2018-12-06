@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace AppDevProject
+namespace AppDevProject.QuestionTypes
 {
     public class MultipleChoiceQuestion : Question
     {
@@ -10,10 +10,6 @@ namespace AppDevProject
         private CheckBox checkBox2;
         private CheckBox checkBox3;
         private CheckBox checkBox4;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
 
         public MultipleChoiceQuestion() {
             Window = new Form();
