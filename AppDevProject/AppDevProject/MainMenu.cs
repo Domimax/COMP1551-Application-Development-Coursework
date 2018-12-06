@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.IO;
+using WMPLib;
+using AppDevProject.QuestionTypes;
 
 namespace AppDevProject
 {
     public partial class MainMenu : Form
     {
-        private Question[] questions;
+        private List<Question> questions;
 
         public MainMenu()
         {
@@ -23,41 +25,54 @@ namespace AppDevProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-            generateQuestions();
+            GenerateQuestions();
             this.Visible = false;
+
+            Thread thread = new Thread(MusicFunc);
+            thread.Start();
         }
 
-        private void generateQuestions()
+        private void GenerateQuestions()
         {
             switch (comboBox1.SelectedIndex)
             {
                 case 0:
-                    questions = new Question[5];
-                    MultipleChoiceQuestion question1 = new MultipleChoiceQuestion();
-                    question1.Window.Visible = true;
-                    questions[0] = question1;
+                    DB db = new DB();
+                    db.getStuff();
+                    //AddQuestions();
                     break;
                 case 1:
-                    questions = new Question[10];
-                    MultipleChoiceQuestion question2 = new MultipleChoiceQuestion();
-                    question2.Window.Visible = true;
-                    Thread thread = new Thread(MusicFunc);
-                    thread.Start();
+                    AddQuestions();
+                    AddQuestions();
                     break;
                 case 2:
-                    questions = new Question[15];
+                    AddQuestions();
+                    AddQuestions();
+                    AddQuestions();
                     break;
                 case 3:
-                    questions = new Question[20];
+                    AddQuestions();
+                    AddQuestions();
+                    AddQuestions();
+                    AddQuestions();
                     break;
             }
         }
 
+        private void AddQuestions() {
+            questions.Add(new InputAnswerQuestion());
+            questions.Add(new MultipleChoiceQuestion());
+            questions.Add(new MusicQuestion());
+            questions.Add(new PictureQuestion());
+            questions.Add(new YesOrNoQuestion());
+        }
+
         void MusicFunc()
         {
-            string text = AppDomain.CurrentDomain.BaseDirectory.ToString();
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Music\beethoven-symphony9-4-ode-to-joy-piano-solo.wav"));
-            player.PlayLooping();
+            WMPLib.WindowsMediaPlayer axMusicPlayer = new WMPLib.WindowsMediaPlayer();           
+            axMusicPlayer.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Music\beethoven-symphony9-4-ode-to-joy-piano-solo.mp3");
+            axMusicPlayer.settings.setMode("loop", true);
+            axMusicPlayer.controls.play();
         }
     }
 }

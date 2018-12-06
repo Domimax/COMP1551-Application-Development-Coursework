@@ -9,12 +9,12 @@ namespace AppDevProject
 {
     public abstract class Question
     {
+        private int id;
+        private string question;
+        private List<Answer> answers;
         private Form window;
-        protected String name;
-        protected String description;
+        private Button submit;
 
-        public string Description { get => description; set => description = value; }
-        public string Name { get => name; set => name = value; }
         public Form Window { get => window; set => window = value; }
 
         protected void Window_FormClosed(object sender, FormClosedEventArgs e)
