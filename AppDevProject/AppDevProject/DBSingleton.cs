@@ -40,7 +40,6 @@ namespace AppDevProject
         {
             List<Question> questions = new List<Question>();
             OleDbConnection connection = GetOleDbConnection();
-           // string query = "SELECT * FROM Question WHERE ROWNUM <= " + amount.ToString() + ";";
             string query = "SELECT * FROM Question;";
             OleDbCommand myCommand = new OleDbCommand(query, connection);
             try
@@ -56,7 +55,7 @@ namespace AppDevProject
                     switch (questionType)
                     {
                         case "InputAnswer":
-                            newQuestion = new InputAnswerQuestion();
+                            newQuestion = new InputAnswerQuestion(id, questionText, getAnswers(id, connection));
                             break;
                         case "MultipleChoice":
                             newQuestion = new MultipleChoiceQuestion();
@@ -73,19 +72,18 @@ namespace AppDevProject
                     }
                     if (newQuestion != null)
                     {
-                        newQuestion.Id = id;
-                        newQuestion.QuestionText = questionText;
                         questions.Add(newQuestion);
                     }
                     else
                     {
-                        throw new Exception("newQuestion variable is null.");
+                        throw new Exception("newQuestion object is null.");
                     }
                 }
                 if (questions.Count == 0)
                 {
                     throw new Exception("Database is empty.");
                 }
+
             }
             catch (Exception ex)
             {
@@ -97,6 +95,43 @@ namespace AppDevProject
                 connection.Close();
             }
             return questions;
+        }
+
+        private List<Answer> getAnswers(int questionId, OleDbConnection connection)
+        {
+            List<Answer> answers = new List<Answer>();
+            string query = "SELECT * FROM Answer WHERE Question_Id = " + questionId + ";";
+            OleDbCommand myCommand = new OleDbCommand(query, connection);
+            try
+            {
+                OleDbDataReader myReader = myCommand.ExecuteReader();
+                while (myReader.Read())
+                {
+                    int id = (int)myReader["ID"];
+                    string answerText = (string)myReader["AnswerText"];
+                    bool correct = (bool)myReader["Correct"];
+                    answers.Add(new Answer(id, answerText, correct));
+                    if (newQuestion != null)
+                    {
+                        questions.Add(newQuestion);
+                    }
+                    else
+                    {
+                        throw new Exception("newQuestion object is null.");
+                    }
+                }
+                if (questions.Count == 0)
+                {
+                    throw new Exception("Database is empty.");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Exception: " + ex);
+                System.Diagnostics.Debug.WriteLine("Exception: " + ex);
+            }
+            return null;
         }
     }
 }
