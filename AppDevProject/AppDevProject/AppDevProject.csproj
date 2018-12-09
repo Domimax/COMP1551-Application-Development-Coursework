@@ -62,6 +62,7 @@
     <Compile Include="QuestionTypes\MusicQuestion.cs" />
     <Compile Include="QuestionTypes\PictureQuestion.cs" />
     <Compile Include="QuestionTypes\YesOrNoQuestion.cs" />
+    <Compile Include="Score.cs" />
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>

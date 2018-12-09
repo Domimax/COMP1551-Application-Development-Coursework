@@ -1,6 +1,6 @@
 ﻿namespace AppDevProject
 {
-    class Answer
+    internal class Answer
     {
         public Answer(int id, string answerString, bool correct) {
             this.Id = id;

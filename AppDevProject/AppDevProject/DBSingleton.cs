@@ -6,7 +6,7 @@ using System.IO;
 
 namespace AppDevProject
 {
-    sealed class DBSingleton
+    internal sealed class DBSingleton
     {
         private static readonly object padlock = new object();
         private static DBSingleton instance = null;
@@ -41,33 +41,33 @@ namespace AppDevProject
             List<Question> questions = new List<Question>();
             OleDbConnection connection = GetOleDbConnection();
             string query = "SELECT * FROM Question;";
-            OleDbCommand myCommand = new OleDbCommand(query, connection);
+            OleDbCommand questionCommand = new OleDbCommand(query, connection);
             try
             {
                 connection.Open();
-                OleDbDataReader myReader = myCommand.ExecuteReader();
-                while (myReader.Read())
+                OleDbDataReader questionReader = questionCommand.ExecuteReader();
+                while (questionReader.Read())
                 {
-                    int id = (int)myReader["ID"];
-                    string questionText = (string)myReader["QuestionText"];
-                    string questionType = (string)myReader["QuestionType"];
+                    int id = (int)questionReader["ID"];
+                    string questionText = (string)questionReader["QuestionText"];
+                    string questionType = (string)questionReader["QuestionType"];
                     Question newQuestion = null;
                     switch (questionType)
                     {
                         case "InputAnswer":
-                            newQuestion = new InputAnswerQuestion(id, questionText, getAnswers(id, connection));
+                            newQuestion = new InputAnswerQuestion(id, questionText, questionType, getAnswers(id, connection));
                             break;
                         case "MultipleChoice":
-                            newQuestion = new MultipleChoiceQuestion();
+                            newQuestion = new MultipleChoiceQuestion(id, questionText, questionType, getAnswers(id, connection));
                             break;
                         case "Music":
-                            newQuestion = new MusicQuestion();
+                            newQuestion = new MusicQuestion(id, questionText, questionType, getAnswers(id, connection));
                             break;
                         case "Picture":
-                            newQuestion = new PictureQuestion();
+                            newQuestion = new PictureQuestion(id, questionText, questionType, getAnswers(id, connection));
                             break;
                         case "YesOrNo":
-                            newQuestion = new YesOrNoQuestion();
+                            newQuestion = new YesOrNoQuestion(id, questionText, questionType, getAnswers(id, connection));
                             break;
                     }
                     if (newQuestion != null)
@@ -101,37 +101,28 @@ namespace AppDevProject
         {
             List<Answer> answers = new List<Answer>();
             string query = "SELECT * FROM Answer WHERE Question_Id = " + questionId + ";";
-            OleDbCommand myCommand = new OleDbCommand(query, connection);
+            OleDbCommand answerCommand = new OleDbCommand(query, connection);
             try
             {
-                OleDbDataReader myReader = myCommand.ExecuteReader();
-                while (myReader.Read())
+                OleDbDataReader answerReader = answerCommand.ExecuteReader();
+                while (answerReader.Read())
                 {
-                    int id = (int)myReader["ID"];
-                    string answerText = (string)myReader["AnswerText"];
-                    bool correct = (bool)myReader["Correct"];
-                    answers.Add(new Answer(id, answerText, correct));
-                    if (newQuestion != null)
-                    {
-                        questions.Add(newQuestion);
-                    }
-                    else
-                    {
-                        throw new Exception("newQuestion object is null.");
-                    }
+                    int id = (int)answerReader["ID"];
+                    string answerText = (string)answerReader["AnswerText"];
+                    bool correct = (bool)answerReader["Correct"];
+                    answers.Add(new Answer(id, answerText, correct));                   
                 }
-                if (questions.Count == 0)
+                if (answers.Count == 0)
                 {
                     throw new Exception("Database is empty.");
                 }
-
             }
             catch (Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show("Exception: " + ex);
                 System.Diagnostics.Debug.WriteLine("Exception: " + ex);
             }
-            return null;
+            return answers;
         }
     }
 }

@@ -6,7 +6,8 @@ namespace AppDevProject
 {
     public partial class MainMenu : Form
     {
-        private List<Question> Questions { get; set; }
+        internal static Score GameScore { get; set; } = null;
+        internal static List<Question> Questions { get; set; } = null;
 
         public MainMenu()
         {
@@ -15,8 +16,10 @@ namespace AppDevProject
 
         private void button1_Click(object sender, EventArgs e)
         {
+            GameScore = new Score();
             Questions = DBSingleton.GetDBSingletonInstance().getQuestions("5");
-            Questions[0].Window.Visible = true;
+            Questions[Question.Count].Window.Visible = true;
+            Question.Count++;
             this.Visible = false;
         }
     }

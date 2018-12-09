@@ -1,4 +1,7 @@
-﻿namespace AppDevProject
+﻿using System;
+using System.IO;
+
+namespace AppDevProject
 {
     partial class MainMenu
     {
