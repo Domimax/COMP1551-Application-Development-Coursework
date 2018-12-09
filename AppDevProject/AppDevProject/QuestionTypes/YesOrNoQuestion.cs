@@ -72,7 +72,7 @@ namespace AppDevProject.QuestionTypes
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (MainMenu.Questions[Question.Count] == null)
+            if (Question.Count > MainMenu.Questions.Count)
             {
                 Application.Exit();
             }
