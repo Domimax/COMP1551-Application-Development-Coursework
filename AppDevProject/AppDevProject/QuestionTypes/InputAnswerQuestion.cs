@@ -61,20 +61,28 @@ namespace AppDevProject.QuestionTypes
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (Question.Count > MainMenu.Questions.Count)
+            if (textBox.Text == "")
             {
-                Application.Exit();
+                MessageBox.Show("Please input something into the text box.");
             }
-            if (textBox.Text == Answers[0].AnswerString) {
-
-            }
-            Window.Visible = false;
-            MainMenu.Questions[Question.Count].Window.Visible = true;
-            if (MainMenu.Questions[Question.Count].QuestionType == "Music")
+            else
             {
-                ((MusicQuestion)MainMenu.Questions[Question.Count]).Thread.Start();
+                if (textBox.Text.ToLower() == Answers[0].AnswerString.ToLower())
+                {
+                    MainMenu.GameScore.CorrectAnswers++;
+                }
+                if (Question.Count == MainMenu.Questions.Count)
+                {
+                    MessageBox.Show(MainMenu.GameScore.CorrectAnswers.ToString() + " out of " + MainMenu.Questions.Count.ToString() + " correct answers.");
+                    Application.Exit();
+                }
+                else
+                {
+                    Window.Visible = false;
+                    MainMenu.Questions[Question.Count].Window.Visible = true;
+                    Question.Count++;
+                }
             }
-            Question.Count++;
         }
     }
 }

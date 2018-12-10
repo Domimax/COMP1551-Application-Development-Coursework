@@ -11,7 +11,8 @@ namespace AppDevProject.QuestionTypes
         private CheckBox checkBox3;
         private CheckBox checkBox4;
 
-        public MultipleChoiceQuestion(int id, string questionText, string questionType, List<Answer> answers) {
+        public MultipleChoiceQuestion(int id, string questionText, string questionType, List<Answer> answers)
+        {
             Id = id;
             QuestionText = questionText;
             QuestionType = questionType;
@@ -71,7 +72,7 @@ namespace AppDevProject.QuestionTypes
             checkBox4.Size = new System.Drawing.Size(78, 41);
             checkBox4.TabIndex = 6;
             checkBox4.Text = Answers[3].AnswerString;
-         
+
             Window.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             Window.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Window.ClientSize = new System.Drawing.Size(800, 450);
@@ -88,17 +89,29 @@ namespace AppDevProject.QuestionTypes
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (Question.Count > MainMenu.Questions.Count)
+            if (!checkBox1.Checked && !checkBox2.Checked && !checkBox3.Checked && !checkBox4.Checked)
             {
-                Application.Exit();
+                MessageBox.Show("Please check at least one box.");
             }
-            Window.Visible = false;
-            MainMenu.Questions[Question.Count].Window.Visible = true;
-            if (MainMenu.Questions[Question.Count].QuestionType == "Music")
+            else
             {
-                ((MusicQuestion)MainMenu.Questions[Question.Count]).Thread.Start();
+                if (checkBox1.Checked == Answers[0].Correct && checkBox2.Checked == Answers[1].Correct &&
+                    checkBox3.Checked == Answers[2].Correct && checkBox4.Checked == Answers[3].Correct)
+                {
+                    MainMenu.GameScore.CorrectAnswers++;
+                }
+                if (Question.Count == MainMenu.Questions.Count)
+                {
+                    MessageBox.Show(MainMenu.GameScore.CorrectAnswers.ToString() + " out of " + MainMenu.Questions.Count.ToString() + " correct answers.");
+                    Application.Exit();
+                }
+                else
+                {
+                    Window.Visible = false;
+                    MainMenu.Questions[Question.Count].Window.Visible = true;
+                    Question.Count++;
+                }
             }
-            Question.Count++;
         }
     }
 }

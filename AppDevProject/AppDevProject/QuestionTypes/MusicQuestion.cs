@@ -14,7 +14,6 @@ namespace AppDevProject.QuestionTypes
         private RadioButton radioButton4;
 
         public Thread Thread { get; set; }
-        public string Song { get; set; }
 
         public MusicQuestion(int id, string questionText, string questionType, List<Answer> answers)
         {
@@ -90,12 +89,22 @@ namespace AppDevProject.QuestionTypes
             Window.Controls.Add(radioButton4);
             Window.ResumeLayout(false);
             Window.PerformLayout();
+            Window.VisibleChanged += new System.EventHandler(Window_VisibleChanged);
 
-            Song = findSong();
             Thread = new Thread(MusicFunc);
         }
 
-        private string findSong()
+        private void Window_VisibleChanged(object sender, EventArgs e)
+        {
+            if (Window.Visible) {
+                Thread.Start();
+            }
+            else {
+                Thread.Abort();
+            }
+        }
+
+        private Answer FindCorrectSong()
         {
             bool found = false;
             int count = 0;
@@ -103,35 +112,53 @@ namespace AppDevProject.QuestionTypes
             {
                 if (Answers[count].Correct == true)
                 {
-                    Song = Answers[count].AnswerString;
                     found = true;
                 }
+                else
+                {
+                    count++;
+                }
             }
-            return Song;
+            return Answers[count];
         }
 
         private void MusicFunc()
         {
             WMPLib.WindowsMediaPlayer musicPlayer = new WMPLib.WindowsMediaPlayer();
-            musicPlayer.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Music\" + Song + ".mp3");
-            musicPlayer.settings.setMode("loop", true);
+            musicPlayer.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Music\" + FindCorrectSong().AnswerString + ".mp3");
             musicPlayer.controls.play();
+            Thread.Abort();
         }
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (Question.Count > MainMenu.Questions.Count)
+            if (!radioButton1.Checked && !radioButton2.Checked && !radioButton3.Checked && !radioButton4.Checked)
             {
-                Application.Exit();
+                MessageBox.Show("Please check at least one box.");
             }
-            Thread.Abort();
-            Window.Visible = false;
-            MainMenu.Questions[Question.Count].Window.Visible = true;
-            if (MainMenu.Questions[Question.Count].QuestionType == "Music")
+            else
             {
-                ((MusicQuestion)MainMenu.Questions[Question.Count]).Thread.Start();
+                if (radioButton1.Checked == Answers[0].Correct && radioButton2.Checked == Answers[1].Correct &&
+                    radioButton3.Checked == Answers[2].Correct && radioButton4.Checked == Answers[3].Correct)
+                {
+                    MainMenu.GameScore.CorrectAnswers++;
+                }
+                if (Question.Count == MainMenu.Questions.Count)
+                {
+                    MessageBox.Show(MainMenu.GameScore.CorrectAnswers.ToString() + " out of " + MainMenu.Questions.Count.ToString() + " correct answers.");
+                    Application.Exit();
+                }
+                else
+                {
+                    Window.Visible = false;
+                    MainMenu.Questions[Question.Count].Window.Visible = true;
+                    if (MainMenu.Questions[Question.Count].QuestionType == "Music")
+                    {
+                        ((MusicQuestion)MainMenu.Questions[Question.Count]).Thread.Start();
+                    }
+                    Question.Count++;
+                }
             }
-            Question.Count++;
         }
     }
 }

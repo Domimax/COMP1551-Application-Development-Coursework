@@ -11,6 +11,7 @@ namespace AppDevProject.QuestionTypes
         private PictureBox pictureBox2;
         private PictureBox pictureBox3;
         private PictureBox pictureBox4;
+        private Answer chosenPicture;
 
         public PictureQuestion(int id, string questionText, string questionType, List<Answer> answers)
         {
@@ -18,6 +19,7 @@ namespace AppDevProject.QuestionTypes
             QuestionText = questionText;
             QuestionType = questionType;
             Answers = answers;
+            chosenPicture = null;
             InitializeComponent();
         }
 
@@ -58,6 +60,7 @@ namespace AppDevProject.QuestionTypes
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += new System.EventHandler(PictureBox1_Click);
 
             pictureBox2.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Pictures\" + Answers[1].AnswerString + ".jpg");
             pictureBox2.Location = new System.Drawing.Point(450, 150);
@@ -67,6 +70,7 @@ namespace AppDevProject.QuestionTypes
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 4;
             pictureBox2.TabStop = false;
+            pictureBox2.Click += new System.EventHandler(PictureBox2_Click);
 
             pictureBox3.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Pictures\" + Answers[2].AnswerString + ".jpg");
             pictureBox3.Location = new System.Drawing.Point(200, 250);
@@ -76,6 +80,7 @@ namespace AppDevProject.QuestionTypes
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 5;
             pictureBox3.TabStop = false;
+            pictureBox3.Click += new System.EventHandler(PictureBox3_Click);
 
             pictureBox4.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Pictures\" + Answers[3].AnswerString + ".jpg");
             pictureBox4.Location = new System.Drawing.Point(450, 250);
@@ -85,6 +90,7 @@ namespace AppDevProject.QuestionTypes
             pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox4.TabIndex = 6;
             pictureBox4.TabStop = false;
+            pictureBox4.Click += new System.EventHandler(PictureBox4_Click);
 
             Window.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             Window.AutoScaleMode = AutoScaleMode.Font;
@@ -104,18 +110,68 @@ namespace AppDevProject.QuestionTypes
             Window.PerformLayout();
         }
 
+        private Answer FindCorrectPicture()
+        {
+            bool found = false;
+            int count = 0;
+            while (!found)
+            {
+                if (Answers[count].Correct == true)
+                {
+                    found = true;
+                }
+                else
+                {
+                    count++;
+                }
+            }
+            return Answers[count];
+        }
+
+        private void PictureBox1_Click(object sender, EventArgs e)
+        {
+            chosenPicture = Answers[0];
+        }
+
+        private void PictureBox2_Click(object sender, EventArgs e)
+        {
+            chosenPicture = Answers[1];
+        }
+
+        private void PictureBox3_Click(object sender, EventArgs e)
+        {
+            chosenPicture = Answers[2];
+        }
+
+        private void PictureBox4_Click(object sender, EventArgs e)
+        {
+            chosenPicture = Answers[3];
+        }
+
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (Question.Count > MainMenu.Questions.Count) {
-                Application.Exit();
-            }
-            Window.Visible = false;
-            MainMenu.Questions[Question.Count].Window.Visible = true;
-            if (MainMenu.Questions[Question.Count].QuestionType == "Music")
+            if (chosenPicture == null)
             {
-                ((MusicQuestion)MainMenu.Questions[Question.Count]).Thread.Start();
+                MessageBox.Show("Please select a picture.");
             }
-            Question.Count++;
+            else
+            {
+                if (chosenPicture.Id == FindCorrectPicture().Id)
+                {
+                    MainMenu.GameScore.CorrectAnswers++;
+                }
+                if (Question.Count == MainMenu.Questions.Count)
+                {
+                    MessageBox.Show(MainMenu.GameScore.CorrectAnswers.ToString() + " out of " + MainMenu.Questions.Count.ToString() + " correct answers.");
+                    Application.Exit();
+                }
+                else
+                {
+                    Window.Visible = false;
+                    MainMenu.Questions[Question.Count].Window.Visible = true;
+                    Question.Count++;
+                }
+            }
         }
     }
 }

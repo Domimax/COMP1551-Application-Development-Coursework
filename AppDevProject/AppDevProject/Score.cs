@@ -14,15 +14,16 @@ namespace AppDevProject
         public string PlayerName { get; set; }
         public DateTime Completed { get; set; }
         public DateTime Started { get; set; }
-        public double timeTook { get; set; }
+        public double TimeTook { get; set; }
 
         public Score() {
+            CorrectAnswers = 0;
             Started = DateTime.Now;
         }
 
         public void getDateTime() {
             Completed = DateTime.Now;
-            double timeTook = Completed.TimeOfDay.TotalMinutes - Started.TimeOfDay.TotalMinutes;
+            double timeTook = Completed.TimeOfDay.TotalSeconds - Started.TimeOfDay.TotalSeconds;
         }
     }
 }

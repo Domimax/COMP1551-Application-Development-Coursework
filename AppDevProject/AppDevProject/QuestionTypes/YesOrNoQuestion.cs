@@ -72,17 +72,28 @@ namespace AppDevProject.QuestionTypes
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (Question.Count > MainMenu.Questions.Count)
+            if (!radioButton1.Checked && !radioButton2.Checked)
             {
-                Application.Exit();
+                MessageBox.Show("Please check at least one box.");
             }
-            Window.Visible = false;
-            MainMenu.Questions[Question.Count].Window.Visible = true;
-            if (MainMenu.Questions[Question.Count].QuestionType == "Music")
+            else
             {
-                ((MusicQuestion)MainMenu.Questions[Question.Count]).Thread.Start();
+                if ((Answers[0].Correct && radioButton1.Checked) || (Answers[1].Correct && radioButton2.Checked))
+                {
+                    MainMenu.GameScore.CorrectAnswers++;
+                }
+                if (Question.Count == MainMenu.Questions.Count)
+                {
+                    MessageBox.Show(MainMenu.GameScore.CorrectAnswers.ToString() + " out of " + MainMenu.Questions.Count.ToString() + " correct answers.");
+                    Application.Exit();
+                }
+                else
+                {
+                    Window.Visible = false;
+                    MainMenu.Questions[Question.Count].Window.Visible = true;
+                    Question.Count++;
+                }
             }
-            Question.Count++;
         }
     }
 }
