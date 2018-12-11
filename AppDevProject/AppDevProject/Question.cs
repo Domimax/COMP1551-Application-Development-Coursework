@@ -10,6 +10,8 @@ namespace AppDevProject
         public string QuestionText { get; set; }
         public string QuestionType { get; set; }
         public Form Window { get; set; }
+        public Label ScoreLabel { get; set; }
+        public Label TimerLabel { get; set; } = null;
         public List<Answer> Answers { get; set; }
 
         protected void Window_FormClosed(object sender, FormClosedEventArgs e)

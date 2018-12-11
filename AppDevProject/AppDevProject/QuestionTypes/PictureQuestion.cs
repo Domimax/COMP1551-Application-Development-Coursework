@@ -36,6 +36,8 @@ namespace AppDevProject.QuestionTypes
             ((System.ComponentModel.ISupportInitialize)(pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(pictureBox4)).BeginInit();
+            ScoreLabel = new Label();
+            TimerLabel = new Label();
 
             submitButton.Location = new System.Drawing.Point(350, 400);
             submitButton.Name = "submitButton";
@@ -92,6 +94,20 @@ namespace AppDevProject.QuestionTypes
             pictureBox4.TabStop = false;
             pictureBox4.Click += new System.EventHandler(PictureBox4_Click);
 
+            ScoreLabel.AutoSize = true;
+            ScoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            ScoreLabel.Location = new System.Drawing.Point(100, 25);
+            ScoreLabel.Name = "scoreLabel";
+            ScoreLabel.Size = new System.Drawing.Size(100, 100);
+            ScoreLabel.TabIndex = 7;
+
+            TimerLabel.AutoSize = true;
+            TimerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            TimerLabel.Location = new System.Drawing.Point(450, 25);
+            TimerLabel.Name = "timerLabel";
+            TimerLabel.Size = new System.Drawing.Size(100, 100);
+            TimerLabel.TabIndex = 8;
+
             Window.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             Window.AutoScaleMode = AutoScaleMode.Font;
             Window.ClientSize = new System.Drawing.Size(800, 450);
@@ -106,6 +122,8 @@ namespace AppDevProject.QuestionTypes
             ((System.ComponentModel.ISupportInitialize)(pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(pictureBox4)).EndInit();
+            Window.Controls.Add(ScoreLabel);
+            Window.Controls.Add(TimerLabel);
             Window.ResumeLayout(false);
             Window.PerformLayout();
         }
@@ -160,16 +178,19 @@ namespace AppDevProject.QuestionTypes
                 {
                     MainMenu.GameScore.CorrectAnswers++;
                 }
-                if (Question.Count == MainMenu.Questions.Count)
+                if (Question.Count == MainMenu.Questions.Count-1)
                 {
-                    MessageBox.Show(MainMenu.GameScore.CorrectAnswers.ToString() + " out of " + MainMenu.Questions.Count.ToString() + " correct answers.");
+                    MainMenu.GameTimer.Stop();
+                    MessageBox.Show(MainMenu.GameScore.CorrectAnswers.ToString() + " out of " + MainMenu.Questions.Count.ToString() + " correct answers.\n" +
+                        "You completed the quiz in " + MainMenu.GameScore.TimeTook + "seconds.");
                     Application.Exit();
                 }
                 else
                 {
-                    Window.Visible = false;
-                    MainMenu.Questions[Question.Count].Window.Visible = true;
                     Question.Count++;
+                    Window.Visible = false;
+                    MainMenu.Questions[Question.Count].ScoreLabel.Text = "Question " + MainMenu.Questions[Question.Count].Id + " out of " + MainMenu.Questions.Count;
+                    MainMenu.Questions[Question.Count].Window.Visible = true;
                 }
             }
         }

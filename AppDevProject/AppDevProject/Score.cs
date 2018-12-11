@@ -13,17 +13,15 @@ namespace AppDevProject
         public double CorrectPercentage { get; set; }
         public string PlayerName { get; set; }
         public DateTime Completed { get; set; }
-        public DateTime Started { get; set; }
-        public double TimeTook { get; set; }
+        public int TimeTook { get; set; }
 
         public Score() {
             CorrectAnswers = 0;
-            Started = DateTime.Now;
+            TimeTook = 0;
         }
 
         public void getDateTime() {
             Completed = DateTime.Now;
-            double timeTook = Completed.TimeOfDay.TotalSeconds - Started.TimeOfDay.TotalSeconds;
         }
     }
 }

@@ -48,6 +48,12 @@
   <ItemGroup>
     <Compile Include="Answer.cs" />
     <Compile Include="DBSingleton.cs" />
+    <Compile Include="FinishMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FinishMenu.Designer.cs">
+      <DependentUpon>FinishMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>

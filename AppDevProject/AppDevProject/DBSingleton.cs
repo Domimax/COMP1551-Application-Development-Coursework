@@ -16,15 +16,17 @@ namespace AppDevProject
 
         }
 
-        public static DBSingleton GetDBSingletonInstance()
+        public static DBSingleton GetDBSingletonInstance
         {
-            lock (padlock)
-            {
-                if (instance == null)
+            get {
+                lock (padlock)
                 {
-                    instance = new DBSingleton();
+                    if (instance == null)
+                    {
+                        instance = new DBSingleton();
+                    }
+                    return instance;
                 }
-                return instance;
             }
         }
 

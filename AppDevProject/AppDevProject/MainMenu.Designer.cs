@@ -55,7 +55,7 @@ namespace AppDevProject
             this.button1.TabIndex = 1;
             this.button1.Text = "Start your new quiz";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // label2
             // 
@@ -90,7 +90,7 @@ namespace AppDevProject
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Name = "MainMenu";
-            this.Text = "Form1";
+            this.Text = "Educational quiz game";
             this.ResumeLayout(false);
             this.PerformLayout();
 
