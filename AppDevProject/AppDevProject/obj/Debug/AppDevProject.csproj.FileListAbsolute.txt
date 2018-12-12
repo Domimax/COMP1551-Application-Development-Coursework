@@ -1,0 +1,23 @@
+C:\Users\ms8794c\Downloads\COMP1551-Application-Development-Coursework-master\COMP1551-Application-Development-Coursework-master\AppDevProject\AppDevProject\bin\Debug\AppDevProject.exe.config
+C:\Users\ms8794c\Downloads\COMP1551-Application-Development-Coursework-master\COMP1551-Application-Development-Coursework-master\AppDevProject\AppDevProject\bin\Debug\AppDevProject.exe
+C:\Users\ms8794c\Downloads\COMP1551-Application-Development-Coursework-master\COMP1551-Application-Development-Coursework-master\AppDevProject\AppDevProject\bin\Debug\AppDevProject.pdb
+C:\Users\ms8794c\Downloads\COMP1551-Application-Development-Coursework-master\COMP1551-Application-Development-Coursework-master\AppDevProject\AppDevProject\obj\Debug\AppDevProject.csprojResolveAssemblyReference.cache
+C:\Users\ms8794c\Downloads\COMP1551-Application-Development-Coursework-master\COMP1551-Application-Development-Coursework-master\AppDevProject\AppDevProject\obj\Debug\AppDevProject.Properties.Resources.resources
+C:\Users\ms8794c\Downloads\COMP1551-Application-Development-Coursework-master\COMP1551-Application-Development-Coursework-master\AppDevProject\AppDevProject\obj\Debug\AppDevProject.csproj.GenerateResource.Cache
+C:\Users\ms8794c\Downloads\COMP1551-Application-Development-Coursework-master\COMP1551-Application-Development-Coursework-master\AppDevProject\AppDevProject\obj\Debug\AppDevProject.csproj.CoreCompileInputs.cache
+C:\Users\ms8794c\Downloads\COMP1551-Application-Development-Coursework-master\COMP1551-Application-Development-Coursework-master\AppDevProject\AppDevProject\obj\Debug\AppDevProject.exe
+C:\Users\ms8794c\Downloads\COMP1551-Application-Development-Coursework-master\COMP1551-Application-Development-Coursework-master\AppDevProject\AppDevProject\obj\Debug\AppDevProject.pdb
+C:\Users\ms8794c\Downloads\COMP1551-Application-Development-Coursework-master\COMP1551-Application-Development-Coursework-master\AppDevProject\AppDevProject\obj\Debug\AppDevProject.MainMenu.resources
+C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\bin\Debug\AppDevProject.exe.config
+C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\bin\Debug\AppDevProject.exe
+C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\bin\Debug\AppDevProject.pdb
+C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\obj\Debug\AppDevProject.csprojAssemblyReference.cache
+C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\obj\Debug\Interop.WMPLib.dll
+C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\obj\Debug\AppDevProject.csproj.ResolveComReference.cache
+C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\obj\Debug\AppDevProject.MainMenu.resources
+C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\obj\Debug\AppDevProject.Properties.Resources.resources
+C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\obj\Debug\AppDevProject.csproj.GenerateResource.cache
+C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\obj\Debug\AppDevProject.csproj.CoreCompileInputs.cache
+C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\obj\Debug\AppDevProject.exe
+C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\obj\Debug\AppDevProject.pdb
+C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\obj\Debug\AppDevProject.FinishMenu.resources
