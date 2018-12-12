@@ -20,3 +20,4 @@ C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Co
 C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\obj\Debug\AppDevProject.csproj.CoreCompileInputs.cache
 C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\obj\Debug\AppDevProject.exe
 C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\obj\Debug\AppDevProject.pdb
+C:\Users\Maks Domas Smirnov\Documents\GitHub\COMP1551-Application-Development-Coursework\AppDevProject\AppDevProject\obj\Debug\AppDevProject.FinishMenu.resources

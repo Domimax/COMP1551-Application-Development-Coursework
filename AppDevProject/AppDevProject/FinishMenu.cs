@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AppDevProject
@@ -15,6 +8,18 @@ namespace AppDevProject
         public FinishMenu()
         {
             InitializeComponent();
+            this.label1.Text = MainMenu.GameScore.CorrectAnswers.ToString() + " out of " + MainMenu.Questions.Count.ToString() + " correct answers.\n" +
+            "You completed the quiz in " + MainMenu.GameScore.TimeTook + "seconds.";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

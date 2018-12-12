@@ -96,6 +96,7 @@ namespace AppDevProject.QuestionTypes
 
             Window.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             Window.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Window.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Window.ClientSize = new System.Drawing.Size(800, 450);
             Window.FormClosed += new System.Windows.Forms.FormClosedEventHandler(Window_FormClosed);
             Window.Controls.Add(submitButton);
@@ -165,9 +166,9 @@ namespace AppDevProject.QuestionTypes
                 if (Question.Count == MainMenu.Questions.Count-1)
                 {
                     MainMenu.GameTimer.Stop();
-                    MessageBox.Show(MainMenu.GameScore.CorrectAnswers.ToString() + " out of " + MainMenu.Questions.Count.ToString() + " correct answers.\n" +
-                        "You completed the quiz in " + MainMenu.GameScore.TimeTook + "seconds.");
-                    Application.Exit();
+                    FinishMenu finishMenu = new FinishMenu();
+                    Window.Visible = false;
+                    finishMenu.Visible = true;
                 }
                 else
                 {
