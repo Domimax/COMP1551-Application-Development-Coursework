@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace AppDevProject.QuestionTypes
 {
     //A question type where the user has to select a single corresponding picture to answer the question
-    internal class PictureQuestion : Question
+    public class PictureQuestion : Question
     {
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;

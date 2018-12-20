@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace AppDevProject.QuestionTypes
 {
     //A question type where you are allowed multiple choices for answering the question.
-    internal class MultipleChoiceQuestion : Question
+    public class MultipleChoiceQuestion : Question
     {
         private CheckBox checkBox1;
         private CheckBox checkBox2;

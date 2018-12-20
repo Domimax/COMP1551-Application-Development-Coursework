@@ -8,7 +8,7 @@ namespace AppDevProject
     public partial class LeaderboardMenu : Form
     {
         //List of all previous scores.
-        List<Score> scores;
+        private List<Score> scores;
 
         public LeaderboardMenu()
         {
@@ -26,7 +26,7 @@ namespace AppDevProject
             Visible = true;
         }
 
-        public void Window_FormClosed(object sender, FormClosedEventArgs e)
+        private void Window_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }

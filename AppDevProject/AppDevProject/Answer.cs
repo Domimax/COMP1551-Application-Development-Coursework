@@ -1,7 +1,7 @@
 ﻿namespace AppDevProject
 {
     //A class to store the details of an answer of a particular question.
-    internal class Answer
+    public class Answer
     {
         public Answer(int id, string answerString, bool correct) {
             this.Id = id;

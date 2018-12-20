@@ -11,11 +11,11 @@ namespace AppDevProject
         //Delegate for the timer.
         public delegate void TimerDelegate();
         //GameScore variable is the score for the quiz that is currently being solved.
-        internal static Score GameScore { get; set; } = null;
+        public static Score GameScore { get; set; } = null;
         //GameTimer variable is a timer for the current quiz. Stops when the quiz is finished.
-        internal static System.Timers.Timer GameTimer { get; set; } = null;
+        public static System.Timers.Timer GameTimer { get; set; } = null;
         //A list of questions for the current quiz.
-        internal static List<Question> Questions { get; set; } = null;
+        public static List<Question> Questions { get; set; } = null;
 
         public MainMenu()
         {

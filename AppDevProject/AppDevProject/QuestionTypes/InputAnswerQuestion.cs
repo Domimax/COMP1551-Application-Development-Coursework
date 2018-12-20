@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace AppDevProject.QuestionTypes
 {
     //A question type where you have to input your own answer to the question into a textbox.
-    internal class InputAnswerQuestion : Question
+    public class InputAnswerQuestion : Question
     {
         private TextBox textBox;
 

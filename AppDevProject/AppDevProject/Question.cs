@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace AppDevProject
 {
     // Abstract class for different question types
-    internal abstract class Question
+    public abstract class Question
     {
         // Variable Count stores the number of the question the player is currently answering
         public static int Count { get; set; } = 0;

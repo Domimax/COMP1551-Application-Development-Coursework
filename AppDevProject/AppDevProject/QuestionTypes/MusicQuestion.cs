@@ -7,14 +7,14 @@ using System.Windows.Forms;
 namespace AppDevProject.QuestionTypes
 {
     //A question type where you have to select a single author whose music is playing in the background.
-    internal class MusicQuestion : Question
+    public class MusicQuestion : Question
     {
         private RadioButton radioButton1;
         private RadioButton radioButton2;
         private RadioButton radioButton3;
         private RadioButton radioButton4;
 
-        public Thread Thread { get; set; }
+        private Thread MusicThread { get; set; }
         private WMPLib.WindowsMediaPlayer musicPlayer;
 
         public MusicQuestion(int id, string questionText, string questionType, List<Answer> answers)
@@ -112,7 +112,7 @@ namespace AppDevProject.QuestionTypes
             Window.PerformLayout();
             Window.VisibleChanged += new EventHandler(Window_VisibleChanged);
 
-            Thread = new Thread(MusicFunc);
+            MusicThread = new Thread(MusicFunc);
         }
 
         //Event which is triggered every time the Visible property of the Window variable is changed.
@@ -121,11 +121,11 @@ namespace AppDevProject.QuestionTypes
             //If the window is visible, then the thread responsible for playing music should start.
             if (Window.Visible)
             {
-                Thread.Start();
+                MusicThread.Start();
             }
             else
             {
-                Thread.Abort();
+                MusicThread.Abort();
             }
         }
 

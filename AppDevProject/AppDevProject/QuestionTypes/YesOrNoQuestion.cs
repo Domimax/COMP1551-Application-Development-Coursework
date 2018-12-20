@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace AppDevProject.QuestionTypes
 {
     //A question type where the user has to select one option, either yes or no, to answer the question.
-    internal class YesOrNoQuestion : Question
+    public class YesOrNoQuestion : Question
     {
         private RadioButton radioButton1;
         private RadioButton radioButton2;
@@ -73,10 +73,10 @@ namespace AppDevProject.QuestionTypes
             TimerLabel.TabIndex = 8;
 
             Window.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            Window.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Window.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Window.AutoScaleMode = AutoScaleMode.Font;
+            Window.StartPosition = FormStartPosition.CenterScreen;
             Window.ClientSize = new System.Drawing.Size(900, 450);
-            Window.FormClosed += new System.Windows.Forms.FormClosedEventHandler(Window_FormClosed);
+            Window.FormClosed += new FormClosedEventHandler(Window_FormClosed);
             Window.Controls.Add(submitButton);
             Window.Controls.Add(questionLabel);
             Window.Controls.Add(radioButton1);

@@ -3,7 +3,7 @@
 namespace AppDevProject
 {
     //Score class is used to store information about a players stats in a specific quiz session.
-    internal class Score
+    public class Score
     {
         public int Id { get; set; }
         public int CorrectAnswers { get; set; }
