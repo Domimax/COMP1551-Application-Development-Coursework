@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AppDevProject.QuestionTypes
 {
+    //A question type where the user has to select one option, either yes or no, to answer the question.
     internal class YesOrNoQuestion : Question
     {
         private RadioButton radioButton1;
@@ -40,7 +38,7 @@ namespace AppDevProject.QuestionTypes
 
             questionLabel.AutoSize = true;
             questionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            questionLabel.Location = new System.Drawing.Point(300, 100);
+            questionLabel.Location = new System.Drawing.Point(100, 100);
             questionLabel.Name = "questionLabel";
             questionLabel.Size = new System.Drawing.Size(100, 100);
             questionLabel.TabIndex = 2;
@@ -77,7 +75,7 @@ namespace AppDevProject.QuestionTypes
             Window.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             Window.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Window.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Window.ClientSize = new System.Drawing.Size(800, 450);
+            Window.ClientSize = new System.Drawing.Size(900, 450);
             Window.FormClosed += new System.Windows.Forms.FormClosedEventHandler(Window_FormClosed);
             Window.Controls.Add(submitButton);
             Window.Controls.Add(questionLabel);
@@ -89,32 +87,22 @@ namespace AppDevProject.QuestionTypes
             Window.PerformLayout();
         }
 
-        private void SubmitButton_Click(object sender, EventArgs e)
+        protected override void SubmitButton_Click(object sender, EventArgs e)
         {
+            //Check if the user provided an answer.
             if (!radioButton1.Checked && !radioButton2.Checked)
             {
                 MessageBox.Show("Please check at least one box.");
             }
             else
             {
+                //If the answer is correct, increase the score.
                 if ((Answers[0].Correct && radioButton1.Checked) || (Answers[1].Correct && radioButton2.Checked))
                 {
                     MainMenu.GameScore.CorrectAnswers++;
                 }
-                if (Question.Count == MainMenu.Questions.Count-1)
-                {
-                    MainMenu.GameTimer.Stop();
-                    FinishMenu finishMenu = new FinishMenu();
-                    Window.Visible = false;
-                    finishMenu.Visible = true;
-                }
-                else
-                {
-                    Question.Count++;
-                    Window.Visible = false;
-                    MainMenu.Questions[Question.Count].ScoreLabel.Text = "Question " + MainMenu.Questions[Question.Count].Id + " out of " + MainMenu.Questions.Count;
-                    MainMenu.Questions[Question.Count].Window.Visible = true;
-                }
+                //Check if this question is the last one.
+                TryFinalise();
             }
         }
     }

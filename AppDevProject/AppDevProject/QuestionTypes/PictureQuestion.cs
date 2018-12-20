@@ -5,6 +5,7 @@ using System.Windows.Forms;
 
 namespace AppDevProject.QuestionTypes
 {
+    //A question type where the user has to select a single corresponding picture to answer the question
     internal class PictureQuestion : Question
     {
         private PictureBox pictureBox1;
@@ -44,11 +45,11 @@ namespace AppDevProject.QuestionTypes
             submitButton.Size = new System.Drawing.Size(78, 41);
             submitButton.TabIndex = 1;
             submitButton.Text = "Submit your answer here";
-            submitButton.Click += new System.EventHandler(SubmitButton_Click);
+            submitButton.Click += new EventHandler(SubmitButton_Click);
 
             questionLabel.AutoSize = true;
             questionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            questionLabel.Location = new System.Drawing.Point(300, 100);
+            questionLabel.Location = new System.Drawing.Point(100, 100);
             questionLabel.Name = "questionLabel";
             questionLabel.Size = new System.Drawing.Size(100, 100);
             questionLabel.TabIndex = 2;
@@ -62,7 +63,7 @@ namespace AppDevProject.QuestionTypes
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += new System.EventHandler(PictureBox1_Click);
+            pictureBox1.Click += new EventHandler(PictureBox1_Click);
 
             pictureBox2.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Pictures\" + Answers[1].AnswerString + ".jpg");
             pictureBox2.Location = new System.Drawing.Point(450, 150);
@@ -72,7 +73,7 @@ namespace AppDevProject.QuestionTypes
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 4;
             pictureBox2.TabStop = false;
-            pictureBox2.Click += new System.EventHandler(PictureBox2_Click);
+            pictureBox2.Click += new EventHandler(PictureBox2_Click);
 
             pictureBox3.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Pictures\" + Answers[2].AnswerString + ".jpg");
             pictureBox3.Location = new System.Drawing.Point(200, 250);
@@ -82,7 +83,7 @@ namespace AppDevProject.QuestionTypes
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 5;
             pictureBox3.TabStop = false;
-            pictureBox3.Click += new System.EventHandler(PictureBox3_Click);
+            pictureBox3.Click += new EventHandler(PictureBox3_Click);
 
             pictureBox4.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Pictures\" + Answers[3].AnswerString + ".jpg");
             pictureBox4.Location = new System.Drawing.Point(450, 250);
@@ -92,7 +93,7 @@ namespace AppDevProject.QuestionTypes
             pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox4.TabIndex = 6;
             pictureBox4.TabStop = false;
-            pictureBox4.Click += new System.EventHandler(PictureBox4_Click);
+            pictureBox4.Click += new EventHandler(PictureBox4_Click);
 
             ScoreLabel.AutoSize = true;
             ScoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -110,8 +111,8 @@ namespace AppDevProject.QuestionTypes
 
             Window.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             Window.AutoScaleMode = AutoScaleMode.Font;
-            Window.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Window.ClientSize = new System.Drawing.Size(800, 450);
+            Window.StartPosition = FormStartPosition.CenterScreen;
+            Window.ClientSize = new System.Drawing.Size(900, 450);
             Window.FormClosed += new FormClosedEventHandler(Window_FormClosed);
             Window.Controls.Add(submitButton);
             Window.Controls.Add(questionLabel);
@@ -129,6 +130,8 @@ namespace AppDevProject.QuestionTypes
             Window.PerformLayout();
         }
 
+        //Method used to find the correct answer in the list of answers
+        //to later compare it with the users selection.
         private Answer FindCorrectPicture()
         {
             bool found = false;
@@ -167,32 +170,22 @@ namespace AppDevProject.QuestionTypes
             chosenPicture = Answers[3];
         }
 
-        private void SubmitButton_Click(object sender, EventArgs e)
+        protected override void SubmitButton_Click(object sender, EventArgs e)
         {
+            //Check if the user provided an answer.
             if (chosenPicture == null)
             {
                 MessageBox.Show("Please select a picture.");
             }
             else
             {
+                //If the answer is correct, increase the score.
                 if (chosenPicture.Id == FindCorrectPicture().Id)
                 {
                     MainMenu.GameScore.CorrectAnswers++;
                 }
-                if (Question.Count == MainMenu.Questions.Count-1)
-                {
-                    MainMenu.GameTimer.Stop();
-                    FinishMenu finishMenu = new FinishMenu();
-                    Window.Visible = false;
-                    finishMenu.Visible = true;
-                }
-                else
-                {
-                    Question.Count++;
-                    Window.Visible = false;
-                    MainMenu.Questions[Question.Count].ScoreLabel.Text = "Question " + MainMenu.Questions[Question.Count].Id + " out of " + MainMenu.Questions.Count;
-                    MainMenu.Questions[Question.Count].Window.Visible = true;
-                }
+                //Check if this question is the last one.
+                TryFinalise();
             }
         }
     }
